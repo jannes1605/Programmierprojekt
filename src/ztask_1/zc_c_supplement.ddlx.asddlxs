@@ -1,0 +1,25 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo:
+{
+  typeName: 'Supplement',
+  typeNamePlural: 'Supplements',
+  title.value: 'SupplementId'
+  
+}
+annotate entity ZC_C_Supplement
+  with 
+{
+  @UI.lineItem: [{ position: 10 }]
+  
+  SupplementId;
+  
+  @UI.lineItem: [{ position: 20 }]
+  BookingId;
+  
+  @UI.lineItem: [{ position: 30 }]
+  BookingSupplementId;
+  
+  @UI.lineItem: [{ position: 40 }]
+  SupplementCategory;
+  
+}

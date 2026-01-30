@@ -1,0 +1,64 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo: { typeNamePlural: 'Flights', title.value: 'CarrierId', description.value: 'AirlineName', imageUrl: 'CarrierImageUrl' }
+@UI.lineItem: [ { criticality: 'OccupancyCriticality' } ]
+@UI.presentationVariant: [{sortOrder: [{ by: 'FlightDate', direction: #ASC }]}]
+annotate entity ZC_C_FLIGHTTP with
+
+{
+  @UI.facet: [ { position: 10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'ConnectionDetails', label: 'Connection Details' },
+               { position: 20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'FlightDetails', label: 'Flight Details' },
+               { position: 30, type: #FIELDGROUP_REFERENCE, targetQualifier: 'OccupationDetails', label: 'Flight Occupation' },
+               { position: 40, targetElement: '_Bookings', label: 'Bookings', type: #LINEITEM_REFERENCE } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'FlightDetails' } ]
+  @UI.lineItem: [ { position: 10 } ]
+  @UI.selectionField: [ { position: 10 } ]
+
+  CarrierId;
+
+  @UI.fieldGroup: [ { position: 30, qualifier: 'FlightDetails' } ]
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.selectionField: [ { position: 20 } ]
+  ConnectionId;
+
+  @UI.fieldGroup: [ { position: 40, qualifier: 'FlightDetails' } ]
+  @UI.lineItem: [ { position: 30 } ]
+  FlightDate;
+
+  @UI.fieldGroup: [ { position: 50, qualifier: 'FlightDetails' } ]
+  PlaneTypeId;
+
+  @UI.fieldGroup: [ { position: 20, qualifier: 'OccupationDetails' } ]
+  SeatsMax;
+
+  @UI.fieldGroup: [ { position: 30, qualifier: 'OccupationDetails' } ]
+  SeatsOccupied;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'FlightDetails' } ]
+  AirlineName;
+
+  @EndUserText.label: 'Occupancy Rate'
+  @UI.dataPoint: { criticality: 'OccupancyCriticality' }
+  @UI.fieldGroup: [ { position: 10, qualifier: 'OccupationDetails' } ]
+  @UI.lineItem: [ { position: 90, criticality: 'OccupancyCriticality', criticalityRepresentation: #WITHOUT_ICON } ]
+  OccupancyRate;
+  
+  @UI.selectionField: [{ position: 30 }]
+  @UI.lineItem: [{ position: 40 }]
+  
+  AirPortFromId;
+  
+  @UI.fieldGroup: [ { position: 10, qualifier: 'ConnectionDetails', label: 'Airport From' } ]
+  AirportFromDisplay;
+  
+  @UI.selectionField: [{ position: 40 }]
+  @UI.lineItem: [{ position: 50 }]
+
+  AirportToId;  
+  
+  @UI.fieldGroup: [ { position: 20, qualifier: 'ConnectionDetails', label: 'Airport To' } ]
+  AirportToDisplay;
+  
+  @UI.lineItem: [ { position: 1, iconUrl: 'CarrierImageUrl', label: 'Carrier' } ]
+  CarrierImageUrl;
+}

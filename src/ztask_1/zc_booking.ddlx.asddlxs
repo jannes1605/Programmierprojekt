@@ -1,0 +1,77 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo:
+{
+  typeName: 'Booking',
+  typeNamePlural: 'Bookings',
+  title.value: 'BookingId',
+  description.value: 'BookingDate'
+}
+
+
+
+annotate entity ZC_C_BookingTP with
+{
+
+  @UI.facet: [ { position: 10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'BookingDetails', label: 'Booking Details' },
+                { position: 20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'PersonalInformation', label: 'Personal Information' },
+                {position: 30, type: #FIELDGROUP_REFERENCE, targetQualifier: 'SupplementInformation', label: 'Supplement Information'}]
+
+  @UI.lineItem: [{ position: 10 }]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'BookingDetails' } ]
+  TravelId;
+
+  @UI.lineItem: [{ position: 20 }]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'BookingDetails' } ]
+  BookingId;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'BookingDetails' } ]
+  BookingDate;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'BookingDetails' } ]
+  CustomerId;
+
+  @UI.hidden: true
+  @UI.lineItem: [{ position: 50 }]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'BookingDetails' } ]
+  CarrierId;
+
+  @UI.hidden: true
+  @UI.lineItem: [{ position: 60 }]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'BookingDetails' } ]
+  ConnectionId;
+
+  @UI.hidden: true
+  @UI.lineItem: [{ position: 70 }]
+  @UI.fieldGroup: [ { position: 70, qualifier: 'BookingDetails' } ]
+  FlightDate;
+
+  @EndUserText.label: 'Price'
+  @UI.lineItem: [{ position: 80 }]
+  @UI.fieldGroup: [ { position: 80, qualifier: 'BookingDetails' } ]
+  FlightPrice;
+  
+  @UI.lineItem:[{position: 91}]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'PersonalInformation' } ]
+  FirstName;
+  
+  @UI.lineItem:[{position: 92}]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'PersonalInformation' } ]
+  LastName;
+  
+  @UI.fieldGroup: [ { position: 10, qualifier: 'SupplementInformation', label: 'Supplement Id' } ]
+  @UI.lineItem: [ { position: 10, qualifier: 'SupplementInformation' } ]
+  SupplementId;
+  
+  @UI.fieldGroup: [ { position: 30, qualifier: 'SupplementInformation', label: 'Supplement Category' } ]
+   @UI.lineItem: [ { position: 20, qualifier: 'SupplementInformation' } ]
+  SupplementCategory;
+  
+  @UI.fieldGroup: [ { position: 20, qualifier: 'SupplementInformation', label: 'Supplement Description' } ]
+   @UI.lineItem: [ { position: 30, qualifier: 'SupplementInformation' } ]
+  SupplementDescription;
+  
+  
+
+}

@@ -1,0 +1,62 @@
+managed implementation in class zbp_c_flight unique;
+strict ( 2 );
+
+define behavior for ZR_C_FlightTP alias Flight
+persistent table /dmo/flight
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  association _Bookings { create; }
+
+  validation checkSeatsAvailability on save { create; update; field SeatsOccupied, SeatsMax; }
+
+  mapping for /dmo/flight corresponding
+    {
+      CarrierId     = carrier_id;
+      ConnectionId  = connection_id;
+      FlightDate    = flight_date;
+      CurrencyCode  = currency_code;
+      PlaneTypeId   = plane_type_id;
+      SeatsMax      = seats_max;
+      SeatsOccupied = seats_occupied;
+      Price         = price;
+    }
+
+  field ( mandatory : create ) CarrierId, ConnectionId, FlightDate, SeatsMax, SeatsOccupied;
+  field ( readonly : update ) CarrierId, ConnectionId, FlightDate;
+  field ( readonly ) OccupancyRate, AirlineName;
+}
+
+define behavior for ZR_C_BOOKINGTP alias Booking // *** ENTFERNE "implementation in class" hier ***
+persistent table /dmo/booking
+lock dependent by _Flight
+authorization dependent by _Flight
+{
+  update;
+  delete;
+
+  validation checkFlightCapacity on save { create; }
+  determination updateFlightSeats on save { create; }
+  determination decreaseFlightSeats on save { delete; }
+  validation createBooking on save { create; }
+
+  field ( mandatory : create ) CustomerId, BookingDate, FlightPrice;
+  field ( readonly : update ) SupplementDescription, TravelId;
+  field ( readonly ) CarrierId, ConnectionId, FlightDate, BookingId, FirstName, LastName;
+  association _Flight;
+
+  mapping for /dmo/booking corresponding
+    {
+      TravelId     = travel_id;
+      BookingId    = booking_id;
+      BookingDate  = booking_date;
+      CustomerId   = customer_id;
+      CarrierId    = carrier_id;
+      ConnectionId = connection_id;
+      FlightPrice  = flight_price;
+    }
+}
